@@ -1,5 +1,3 @@
-// @AngularClass
-
 /*
  * Helper
  * env(), getBanner(), root(), and rootDir()
