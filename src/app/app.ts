@@ -7,6 +7,8 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import {RouteConfig, Router} from 'angular2/router';
 import {Http, Headers} from 'angular2/http';
 
+import '../stylesheets/style.scss';
+
 /*
  * Angular Directives
  */

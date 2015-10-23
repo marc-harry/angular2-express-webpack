@@ -16,6 +16,7 @@ var path = require('path');
 
 // NPM
 var webpack = require('webpack');
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 // Webpack Plugins
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
@@ -24,7 +25,6 @@ var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var DedupePlugin   = webpack.optimize.DedupePlugin;
 var DefinePlugin   = webpack.DefinePlugin;
 var BannerPlugin   = webpack.BannerPlugin;
-
 
 /*
  * Config
@@ -105,6 +105,8 @@ module.exports = {
       // support for .html as raw text
       { test: /\.html$/,  loader: 'raw' },
 
+      { test: /\.scss$/, loader: 'style!css!sass' },
+
       // Support for .ts files.
       { test: /\.ts$/,    loader: 'ts',
         query: {
@@ -144,7 +146,8 @@ module.exports = {
     new CommonsChunkPlugin({
       name: 'common',
       filename: 'common.js'
-    })
+    }),
+    new OpenBrowserPlugin({ url: 'http://localhost:3000' })
   ],
 
   /*
