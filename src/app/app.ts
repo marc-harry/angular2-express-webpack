@@ -32,6 +32,7 @@ import {TodoService} from "./services/todoService";
 class App {
   constructor() {
     console.log("App started!");
+    console.log("1. 2. 3.")
   }
 }
 
