@@ -6,10 +6,10 @@
 
 ```bash
 # clone our repo
-git clone https://github.com/angular-class/angular2-webpack-starter.git 
+git clone https://github.com/marc-harry/angular2-webpack.git 
 
 # change directory to our repo
-cd angular2-webpack-starter
+cd angular2-webpack
 
 # install the repo with npm
 npm install
