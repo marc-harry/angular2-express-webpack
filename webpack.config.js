@@ -1,8 +1,3 @@
-/*
- * Helper
- * env(), getBanner(), root(), and rootDir()
- * are defined at the bottom
- */
 var sliceArgs = Function.prototype.call.bind(Array.prototype.slice);
 var toString  = Function.prototype.call.bind(Object.prototype.toString);
 var NODE_ENV  = process.env.NODE_ENV || 'development';
@@ -74,11 +69,11 @@ module.exports = {
 
   // Config for our build files
   output: {
-    path: root('__build__'),
+    path: path.join(__dirname, '/__build__/'),
     filename: '[name].js',
     sourceMapFilename: '[name].js.map',
-    chunkFilename: '[id].chunk.js'
-    // publicPath: 'http://mycdn.com/'
+    chunkFilename: '[id].chunk.js',
+    publicPath: '/__build__'
   },
 
   resolve: {
@@ -86,11 +81,6 @@ module.exports = {
     extensions: ['','.ts','.js','.json'],
     alias: {
       'rx': '@reactivex/rxjs'
-      // 'common': 'src/common',
-      // 'bindings': 'src/bindings',
-      // 'components': 'src/app/components'
-      // 'services': 'src/app/services',
-      // 'stores': 'src/app/stores'
     }
   },
 
@@ -146,8 +136,7 @@ module.exports = {
     new CommonsChunkPlugin({
       name: 'common',
       filename: 'common.js'
-    }),
-    new OpenBrowserPlugin({ url: 'http://localhost:3000' })
+    })
   ],
 
   /*
@@ -159,29 +148,3 @@ module.exports = {
     __filename: true
   }
 };
-
-// Helper functions
-
-function env(configEnv) {
-  if (configEnv === undefined) { return configEnv; }
-  switch (toString(configEnv[NODE_ENV])) {
-    case '[object Object]'    : return Object.assign({}, configEnv.all || {}, configEnv[NODE_ENV]);
-    case '[object Array]'     : return [].concat(configEnv.all || [], configEnv[NODE_ENV]);
-    case '[object Undefined]' : return configEnv.all;
-    default                   : return configEnv[NODE_ENV];
-  }
-}
-
-function getBanner() {
-  return 'Angular 2 ' + pkg.version;
-}
-
-function root(args) {
-  args = sliceArgs(arguments, 0);
-  return path.join.apply(path, [__dirname].concat(args));
-}
-
-function rootNode(args) {
-  args = sliceArgs(arguments, 0);
-  return root.apply(path, ['node_modules'].concat(args));
-}
