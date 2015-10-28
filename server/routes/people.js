@@ -1,6 +1,6 @@
 import express from 'express';
 const router = new express.Router();
-import {peopleController} from '../controllers/people.controller';
+import peopleController from '../controllers/people.controller';
 
 // Register middleware here
 

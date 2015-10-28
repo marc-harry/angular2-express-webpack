@@ -1,7 +1,11 @@
+import person from '../models/people.model';
 
-export class peopleController {
-    static index(req, res) {
+export default class peopleController {
+
+    static index = (req, res) => {
         console.log('People endpoint');
         res.json('People');
-    }
+    };
+
+
 }

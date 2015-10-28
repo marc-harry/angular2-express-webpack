@@ -6,6 +6,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
 import cookieParser  from 'cookie-parser';
 import logger from 'morgan';
+import mongoose from 'mongoose';
 import config from '../webpack.config.js';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
@@ -14,7 +15,7 @@ const app = express();
 const router = express.Router();
 
 import index from './routes/index';
-import people from './routes/people';
+//import people from './routes/people';
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -23,9 +24,8 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/__build__'));
 app.use(express.static(path.join(__dirname, '../src/public')));
 
+app.use('/api', require('./routes/people'));
 app.use('/', index);
-app.use('/api', people);
-
 
 if (isDeveloping) {
     const compiler = webpack(config);
@@ -40,6 +40,8 @@ if (isDeveloping) {
 
     app.use(webpackHotMiddleware(compiler));
 }
+
+mongoose.connect('mongodb://localhost:27017/angular2');
 
 app.listen(port, 'localhost', (err) => {
     if (err) {
