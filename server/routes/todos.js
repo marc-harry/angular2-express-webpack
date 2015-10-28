@@ -1,10 +1,5 @@
-import express from 'express';
-const router = new express.Router();
-import controller from '../controllers/todos.controller';
-
-// Register middleware here
-
-// Register routes here
-router.get('/todos', controller.index);
-
-export default router;
+var express = require('express');
+var router = express.Router();
+var todos_controller_1 = require('../controllers/todos.controller');
+router.get('/todos', todos_controller_1.default.index);
+module.exports = router;

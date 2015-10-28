@@ -1,5 +1,9 @@
-var mongoose = require('mongoose');
-var personSchema = new mongoose.Schema({
+import * as mongoose from 'mongoose';
+
+/**
+ * Person Schema
+ */
+let personSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: Date.now
@@ -16,5 +20,5 @@ var personSchema = new mongoose.Schema({
         required: "Name cannot be blank"
     }
 });
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = mongoose.model("Person", personSchema);
+
+export default mongoose.model("Person", personSchema);
