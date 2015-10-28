@@ -1,5 +1,5 @@
 import {Component, View, FORM_DIRECTIVES} from "angular2/angular2";
-import {TodoService, TodoModel} from "./services/todoService";
+import {TodoService, TodoModel} from "../services/todoService";
 
 @Component({
     selector:'todo-input'

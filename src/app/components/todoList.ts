@@ -1,10 +1,10 @@
 import {Component, View, NgFor} from "angular2/angular2";
-import {TodoService} from "./services/todoService";
-import {TodoItemRenderer} from "./renderers/todoItemRenderer";
-import {StartsWith} from "./pipes/startsWith";
+import {TodoService} from "../services/todoService";
+import {TodoItemRenderer} from "../renderers/todoItemRenderer";
+import {StartsWith} from "../pipes/startsWith";
 import {LetterSelect} from "./letterSelect";
 import {TodoSearch} from "./todoSearch";
-import {SimpleSearch} from "./pipes/simpleSearch";
+import {SimpleSearch} from "../pipes/simpleSearch";
 
 @Component({
     selector:'todo-list'
