@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     nodemon = require('gulp-nodemon');
 
 gulp.task('compile-ts', function () {
-    gulp.src('server/**')
+    return gulp.src('server/**/*.ts')
         .pipe(sourcemaps.init())
         .pipe(tsc({
             target: 'ES5',
@@ -14,9 +14,9 @@ gulp.task('compile-ts', function () {
             removeComments: true,
             noLib: false,
             emitDecoratorMetadata: true,
-            experimentalDecorators: true,
-            sourceMap: true
+            experimentalDecorators: true
         }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('server'));
 });
 
@@ -30,4 +30,4 @@ gulp.task('start', function () {
    });
 });
 
-gulp.task('default', ['start']);
+gulp.task('default', ['compile-ts', 'start']);

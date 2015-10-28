@@ -7,5 +7,4 @@ export default class peopleController {
             res.send(people);
         });
     };
-
 }
