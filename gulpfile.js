@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     nodemon = require('gulp-nodemon');
 
 gulp.task('compile-ts', function () {
-    gulp.src('server/**/*.ts')
+    gulp.src('server/**')
         .pipe(sourcemaps.init())
         .pipe(tsc({
             target: 'ES5',

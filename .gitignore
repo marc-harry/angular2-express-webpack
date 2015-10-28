@@ -43,6 +43,8 @@ Thumbs.db
 /src/*/__build__/
 __build__/**
 .webpack.json
+
+# Server JS #
 server/**/*.js
 
 #doc
