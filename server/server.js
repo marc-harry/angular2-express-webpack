@@ -1,4 +1,5 @@
 import path from 'path';
+import glob from 'glob';
 import express from 'express';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
@@ -12,10 +13,11 @@ import config from '../webpack.config.js';
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
-const router = express.Router();
+const router = new express.Router();
 
-import index from './routes/index';
-//import people from './routes/people';
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../src/public/index.html'));
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -24,8 +26,10 @@ app.use(cookieParser());
 app.use(express.static(__dirname + '/__build__'));
 app.use(express.static(path.join(__dirname, '../src/public')));
 
-app.use('/api', require('./routes/people'));
-app.use('/', index);
+for (let route of routeFiles()) {
+    app.use('/api', require(route));
+}
+app.use('/', router);
 
 if (isDeveloping) {
     const compiler = webpack(config);
@@ -49,3 +53,12 @@ app.listen(port, 'localhost', (err) => {
     }
     console.info('==> 🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
 });
+
+function routeFiles() {
+    var files = glob.sync('server/routes/**/*.js');
+    var output = [];
+    files.forEach((file) => {
+        output.push(file.replace("server", ".").replace(".js", ""));
+    });
+    return output;
+}
