@@ -20,7 +20,7 @@ gulp.task('compile-ts', function () {
         .pipe(gulp.dest('server'));
 });
 
-gulp.task('start', function () {
+gulp.task('start', ['compile-ts'], function () {
    nodemon({
         script: 'server/server.js',
         ext: 'ts',
@@ -30,4 +30,4 @@ gulp.task('start', function () {
    });
 });
 
-gulp.task('default', ['compile-ts', 'start']);
+gulp.task('default', ['start']);

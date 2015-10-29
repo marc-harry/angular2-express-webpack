@@ -28,7 +28,6 @@ app.use(express.static(path.join(__dirname, '../src/public')));
 for (let route of routeFiles()) {
     app.use('/api', require(route));
 }
-app.use('/', router);
 
 if (isDeveloping) {
     const compiler = webpack(config);
@@ -41,6 +40,8 @@ if (isDeveloping) {
         }
     }));
 }
+
+app.use('*', router);
 
 mongoose.connect('mongodb://localhost:27017/angular2');
 
