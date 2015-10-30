@@ -32,6 +32,10 @@ for (let route of routeFiles()) {
 if (isDeveloping) {
     const compiler = webpack(config);
 
+    compiler.run(function(err, stats) {
+        stats.toString({ chunks: false });
+    });
+
     app.use(webpackMiddleware(compiler, {
         publicPath: config.output.publicPath,
         contentBase: 'src',

@@ -26,21 +26,19 @@ var BannerPlugin   = webpack.BannerPlugin;
  */
 module.exports = {
   devtool: 'source-map',
-  debug: true,
+  debug: false,
   cache: true,
 
-  verbose: true,
-  displayErrorDetails: true,
+  verbose: false,
+  displayErrorDetails: false,
   context: __dirname,
-  stats: {
-    colors: true,
-    reasons: true
-  },
+  stats: 'errors-only',
 
   // our Development Server config
   devServer: {
-    inline: true,
-    colors: true,
+    stats : 'errors-only',
+    inline: false,
+    colors: false,
     historyApiFallback: true,
     contentBase: 'src/public',
     publicPath: '/__build__'

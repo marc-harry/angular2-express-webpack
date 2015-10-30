@@ -21,19 +21,21 @@ gulp.task('compile-ts', function () {
         .pipe(gulp.dest('server'));
 });
  
-gulp.task('tslint', function(){
-      return gulp.src('server/**')
+gulp.task('tslint', function() {
+    gulp.src(['src/**/*.ts'])
         .pipe(tslint())
-        .pipe(tslint.report('verbose'));
+        .pipe(tslint.report('prose', {
+          emitError: false
+        }));
 });
 
-gulp.task('start', ['compile-ts'], function () {
+gulp.task('start', ['compile-ts', "tslint"], function () {
    nodemon({
         script: 'server/server.js',
         ext: 'ts',
         watch: ['server/**'],
-        tasks: ['compile-ts'],
-        // nodeArgs: ['--debug']
+        tasks: ['compile-ts', 'tslint'],
+        nodeArgs: ['--debug']
    });
 });
 
