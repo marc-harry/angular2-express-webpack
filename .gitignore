@@ -47,6 +47,9 @@ __build__/**
 # Server JS #
 server/**/*.js
 
+# Client JS #
+src/app/**/*.js
+
 #doc
 /doc
 
