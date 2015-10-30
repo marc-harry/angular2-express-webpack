@@ -28,11 +28,9 @@ module.exports = {
   devtool: 'source-map',
   debug: true,
   cache: true,
-
-  verbose: true,
-  displayErrorDetails: true,
   context: __dirname,
   stats: {
+    chunks: false,
     colors: true,
     reasons: true
   },
@@ -119,6 +117,9 @@ module.exports = {
       /rtts_assert\/src\/rtts_assert/,
       /reflect-metadata/
     ]
+  },
+  ts: {
+    silent: true
   },
 
   plugins: [

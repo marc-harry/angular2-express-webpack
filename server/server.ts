@@ -36,6 +36,7 @@ if (isDeveloping) {
         publicPath: config.output.publicPath,
         contentBase: 'src',
         stats: {
+            chunks: false,
             colors: true
         }
     }));
