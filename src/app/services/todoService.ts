@@ -7,13 +7,16 @@ export class TodoModel {
     status: string = TodoModel.STARTED;
 
     constructor(
-         public title: string = "",
-         public action: string = ""
-    ) {}
+        public title: string = "",
+        public action: string = ""
+    ) { }
 
     toggle(): void {
-        if (this.status == TodoModel.STARTED) this.status = TodoModel.COMPLETED;
-        else this.status = TodoModel.STARTED;
+        if (this.status === TodoModel.STARTED) {
+            this.status = TodoModel.COMPLETED;
+        } else {
+            this.status = TodoModel.STARTED;
+        }
     }
 }
 
@@ -31,7 +34,7 @@ export class TodoService {
         new TodoModel("code", "type type")
     ];
 
-    addTodo(value:TodoModel):void {
+    addTodo(value: TodoModel): void {
         this.todos.push(value);
     }
 

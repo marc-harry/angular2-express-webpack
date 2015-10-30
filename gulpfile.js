@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     tsc = require('gulp-typescript'),
     sourcemaps = require('gulp-sourcemaps'),
+    tslint = require('gulp-tslint');
     nodemon = require('gulp-nodemon');
 
 gulp.task('compile-ts', function () {
@@ -18,6 +19,12 @@ gulp.task('compile-ts', function () {
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('server'));
+});
+ 
+gulp.task('tslint', function(){
+      return gulp.src('server/**')
+        .pipe(tslint())
+        .pipe(tslint.report('verbose'));
 });
 
 gulp.task('start', ['compile-ts'], function () {
