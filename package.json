@@ -6,11 +6,6 @@
   "scripts": {
     "build": "npm run webpack --colors --display-error-details --display-cached",
     "webpack": "webpack",
-    "clean": "rimraf node_modules tsd_typings",
-    "clean-install": "npm run clean && npm install",
-    "clean-start": "npm run clean && npm start",
-    "prequick-start": "npm install",
-    "watch": "webpack --watch",
     "server": "node server/server.js",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
@@ -18,25 +13,18 @@
     "protractor": "protractor",
     "e2e": "npm run protractor",
     "test": "karma start",
-    "remove-tsd-loader-typings": "rimraf node_modules/typescript-simple-loader/typescript-simple-loader.d.ts",
-    "tsd-update": "npm run remove-tsd-loader-typings && tsd reinstall --overwrite",
-    "docs": "typedoc  --options typedoc.json  src/**/*.ts",
-    "postinstall": "npm run tsd-update && tsd install && tsd link",
     "start": "npm run server"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/marc-harry/angular2-express-webpack"
   },
   "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": ""
-  },
   "homepage": "",
   "dependencies": {
     "@reactivex/rxjs": "5.0.0-alpha.4",
-    "angular2": "2.0.0-alpha.44",
+    "angular2": "2.0.0-alpha.45",
     "babel": "^5.8.29",
     "body-parser": "^1.14.1",
     "cookie-parser": "^1.4.0",

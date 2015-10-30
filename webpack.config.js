@@ -69,7 +69,7 @@ module.exports = {
 
   // Config for our build files
   output: {
-    path: path.join(__dirname, '/__build__/'),
+    path: path.join(__dirname, 'src/public/__build__/'),
     filename: '[name].js',
     sourceMapFilename: '[name].js.map',
     chunkFilename: '[id].chunk.js',
