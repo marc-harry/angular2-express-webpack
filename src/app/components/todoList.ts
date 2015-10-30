@@ -1,5 +1,5 @@
 import {Component, View, NgFor} from "angular2/angular2";
-import {TodoService} from "../services/todoService";
+import {TodoService, TodoModel} from "../services/todoService";
 import {TodoItemRenderer} from "../renderers/todoItemRenderer";
 import {StartsWith} from "../pipes/startsWith";
 import {LetterSelect} from "./letterSelect";
@@ -16,18 +16,23 @@ import {SimpleSearch} from "../pipes/simpleSearch";
         <div>
             <todo-search #todo-search></todo-search>
             <todo-item-renderer
-            *ng-for="#todo of todoService.todos
+            *ng-for="#todo of todoItems
                 | simpleSearch:['title', 'action']:todoSearch.term"
             [todo]="todo"
             >
             </todo-item-renderer>
+
         </div>
     `
 })
 export class TodoList {
+    todoItems: TodoModel[] = null;
+
     constructor(
        public todoService: TodoService
     ) {
-        todoService.getTodos();
+        todoService.getTodos().subscribe((res: TodoModel[]) => {
+            this.todoItems = res
+        });
     }
 }
