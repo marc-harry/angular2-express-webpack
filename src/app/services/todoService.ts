@@ -1,3 +1,5 @@
+import { Injectable } from 'angular2/core';
+import { Http } from 'angular2/http';
 
 export class TodoModel {
     static STARTED: string = "started";
@@ -15,7 +17,14 @@ export class TodoModel {
     }
 }
 
+@Injectable()
 export class TodoService {
+    public baseUrl: string = "http://localhost:3000/api/todos";
+
+    constructor(public http: Http) {
+
+    }
+
     todos: TodoModel[] = [
         new TodoModel("eat", "nom nom"),
         new TodoModel("sleep", "zzzzzzz"),
@@ -24,5 +33,11 @@ export class TodoService {
 
     addTodo(value:TodoModel):void {
         this.todos.push(value);
+    }
+
+    getTodos(): void {
+        this.http.get(this.baseUrl).subscribe(res => {
+            console.log(res);
+        });
     }
 }

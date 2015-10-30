@@ -2,17 +2,10 @@
  * Angular 2 decorators and services
  */
 import {bootstrap, FORM_PROVIDERS, ELEMENT_PROBE_PROVIDERS, Directive, Component, View, ElementRef} from 'angular2/angular2';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {RouteConfig, Router, RouterOutlet, RouterLink} from 'angular2/router';
-import {Http, Headers} from 'angular2/http';
+import {Http, Headers, HTTP_PROVIDERS} from 'angular2/http';
+import {ROUTER_PROVIDERS, RouteConfig, Router, RouterOutlet, RouterLink, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import '../stylesheets/style.scss';
-
-/*
- * Angular Directives
- */
-import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {TodoInput} from "./components/todoInput";
 import {TodoList} from "./components/todoList";

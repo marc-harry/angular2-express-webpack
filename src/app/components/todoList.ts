@@ -27,5 +27,7 @@ import {SimpleSearch} from "../pipes/simpleSearch";
 export class TodoList {
     constructor(
        public todoService: TodoService
-    ) {}
+    ) {
+        todoService.getTodos();
+    }
 }
