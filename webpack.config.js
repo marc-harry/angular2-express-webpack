@@ -32,11 +32,14 @@ module.exports = {
   verbose: false,
   displayErrorDetails: false,
   context: __dirname,
-  stats: 'errors-only',
+  stats: {
+    colors: false,
+    assets: false,
+    reasons: false
+  },
 
   // our Development Server config
   devServer: {
-    stats : 'errors-only',
     inline: false,
     colors: false,
     historyApiFallback: true,
