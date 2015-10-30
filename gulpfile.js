@@ -1,9 +1,12 @@
 var gulp = require('gulp'),
     tsc = require('gulp-typescript'),
     sourcemaps = require('gulp-sourcemaps'),
-    nodemon = require('gulp-nodemon');
+    webpack = require('webpack-stream'),
+    runSequence = require('run-sequence'),
+    config = require('./webpack.config.js'),
+    gls = require('gulp-live-server');
 
-gulp.task('compile-ts', function () {
+gulp.task('compile-ts', function() {
     return gulp.src(['server/**/*.ts', 'typings/**/*.ts'])
         .pipe(sourcemaps.init())
         .pipe(tsc({
@@ -20,14 +23,22 @@ gulp.task('compile-ts', function () {
         .pipe(gulp.dest('server'));
 });
 
-gulp.task('start', ['compile-ts'], function () {
-   nodemon({
-        script: 'server/server.js',
-        ext: 'ts',
-        watch: ['server/**'],
-        tasks: ['compile-ts'],
-        // nodeArgs: ['--debug']
-   });
+gulp.task('webpack', function() {
+    return gulp.src('src')
+        .pipe(webpack(config))
+        .pipe(gulp.dest(config.output.path));
 });
 
-gulp.task('default', ['start']);
+
+gulp.task('watch', function() {
+    gulp.watch(['src/**/*.ts'], ['webpack']);
+    gulp.watch(['server/**/*.ts'], ['compile-ts']);
+
+});
+
+gulp.task('serve', ['compile-ts'], function() {
+    var server = gls.new('server/server.js');
+    server.start();
+});
+
+gulp.task('default', ['serve', 'compile-ts', 'webpack', 'watch']);
