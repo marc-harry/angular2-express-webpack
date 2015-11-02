@@ -23,7 +23,7 @@ var webpackConfig = {
     cache: true,
     module: {
         loaders: [
-            { test: /\.scss$/, loader: 'style!css!sass' },
+            { test: /\.scss$/, loader: 'style!css!sass' }
         ],
     },
     output: {
@@ -31,6 +31,7 @@ var webpackConfig = {
     }
 };
 
+var server = null;
 
 gulp.task('compile-ts', function () {
     return gulp.src(['server/**/*.ts', 'typings/**/*.ts'])
@@ -61,13 +62,17 @@ gulp.task('webpack-app', ['compile-angular-ts'], function () {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(['src/**/*.ts'], ['webpack']);
+    gulp.watch(['src/**/*.ts'], ['webpack-app']);
     gulp.watch(['server/**/*.ts'], ['compile-ts']);
-
+    gulp.watch(['src/public/**/*.js'], function (file) {
+        if (server) {
+            server.notify.apply(server, [file]);
+        }
+    });
 });
 
 gulp.task('serve', ['compile-ts'], function() {
-    var server = gls.new('server/server.js');
+    server = gls.new('server/server.js');
     server.start();
 });
 
