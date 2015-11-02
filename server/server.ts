@@ -5,9 +5,6 @@ import * as bodyParser from 'body-parser';
 import cookieParser = require('cookie-parser');
 import * as logger from 'morgan';
 import * as mongoose from 'mongoose';
-const config = require('../webpack.config.js');
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
 
 const isDeveloping: boolean = process.env.NODE_ENV !== 'production';
 const port: number = isDeveloping ? 3000 : process.env.PORT;
