@@ -18,7 +18,7 @@ import {TodoService, TodoModel} from "../services/todoService";
     ],
     template: `
         <form (ng-submit)="onSubmit()">
-            Title :  <input #title type="text" [(ng-model)]="todoModel.title">
+            Titles :  <input #title type="text" [(ng-model)]="todoModel.title">
             Action: <input type="text" [(ng-model)]="todoModel.action">
             <button type="submit" (click)="title.focus()">Add Todo</button>
         </form>

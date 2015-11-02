@@ -1,8 +1,10 @@
 var gulp = require('gulp'),
     tsc = require('gulp-typescript'),
     sourcemaps = require('gulp-sourcemaps'),
-    nodemon = require('gulp-nodemon'),
-    webpack = require('webpack-stream');
+    webpack = require('webpack-stream'),
+    runSequence = require('run-sequence'),
+    config = require('./webpack.config.js'),
+    gls = require('gulp-live-server');
 
 var tsconfig = {
     target: 'ES5',
@@ -46,31 +48,27 @@ gulp.task('compile-angular-ts', function () {
         .pipe(gulp.dest('src/app'));
 });
 
+gulp.task('webpack', function() {
+    return gulp.src('src')
+        .pipe(webpack(config))
+        .pipe(gulp.dest(config.output.path));
+});
+
 gulp.task('webpack-app', ['compile-angular-ts'], function () {
     return gulp.src('src/app/app.js')
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest('src/public/__build__'));
 });
 
-gulp.task('webpack-all', function () {
-    return gulp.src('src/app/app.ts')
-        .pipe(webpack(require('./webpack.config.js')))
-        .pipe(gulp.dest('src/public/__build__'));
-});
-
 gulp.task('watch', function() {
-    gulp.watch('src/app/**/*.ts', ['webpack-app']);
+    gulp.watch(['src/**/*.ts'], ['webpack']);
+    gulp.watch(['server/**/*.ts'], ['compile-ts']);
+
 });
 
-gulp.task('start', ['compile-ts'], function () {
-   nodemon({
-        script: 'server/server.js',
-        ext: 'ts',
-        watch: ['server/**/*.ts'],
-        tasks: ['compile-ts'],
-        // nodeArgs: ['--debug']
-   });
+gulp.task('serve', ['compile-ts'], function() {
+    var server = gls.new('server/server.js');
+    server.start();
 });
 
-
-gulp.task('default', ['webpack-all', 'start', 'watch']);
+gulp.task('default', ['serve', 'compile-ts', 'webpack', 'watch']);

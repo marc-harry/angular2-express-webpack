@@ -8,7 +8,7 @@ import {Component, View, NgFor, FORM_DIRECTIVES} from "angular2/angular2";
     template: `
         <select [(ng-model)]="selectedLetter">
             <option *ng-for="#letter of letters">{{letter}}</option>
-        </select>
+        </select> 
     `
 })
 export class LetterSelect {
