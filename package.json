@@ -71,6 +71,7 @@
     "object-assign": "4.0.1",
     "open-browser-webpack-plugin": "0.0.1",
     "phantomjs": "^1.9.18",
-    "protractor": "2.5.1"
+    "protractor": "2.5.1",
+    "webpack-stream": "^2.1.1"
   }
 }

@@ -22,24 +22,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(__dirname + '/__build__'));
+app.use('/__build__', express.static(__dirname + '../src/public/__build__'));
 app.use(express.static(path.join(__dirname, '../src/public')));
 
 for (let route of routeFiles()) {
     app.use('/api', require(route));
-}
-
-if (isDeveloping) {
-    const compiler = webpack(config);
-
-    app.use(webpackMiddleware(compiler, {
-        publicPath: config.output.publicPath,
-        contentBase: 'src',
-        stats: {
-            chunks: false,
-            colors: true
-        }
-    }));
 }
 
 app.use('*', router);
