@@ -1,4 +1,4 @@
-/// <reference path="../../src/typings/_custom.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 
 describe('App', () => {
 
