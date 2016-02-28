@@ -44,7 +44,14 @@ module.exports = function(config) {
       devtool: 'inline-source-map',
       module: {
         loaders: [
-          { test: /\.ts$/,   loader: 'typescript-simple?ignoreWarnings[]=2345', exclude: [
+          { test: /\.ts$/,    loader: 'ts',
+            query: {
+              'ignoreDiagnostics': [
+                // 2300, // 2300 -> Duplicate identifier
+                // 2309 // 2309 -> An export assignment cannot be used in a module with other exported elements.
+              ]
+            },
+            exclude: [
               /web_modules/,
               /node_modules/
             ]
