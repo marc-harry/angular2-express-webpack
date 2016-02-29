@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run webpack --colors --display-error-details --display-cached",
     "webpack": "webpack",
-    "server": "node server/server.js",
+    "server": "node dist/server/server.js",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start",
     "preprotractor": "npm run webdriver-update",
